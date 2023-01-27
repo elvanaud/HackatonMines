@@ -212,29 +212,38 @@ void Game::startGame()
     case '*':
     {
       background[pos.y][pos.x] = '.';
-      Gold g = Gold(1);
-      g.store(inv);
+      inv.gold+=1;
     }
       
       break;
+    case 'j': // Potion
+      life_potions-=1;
+      inv.life+=1;
+      background[pos.y][pos.x] = '.';
     case 'K':
-      inv.change_life(-1);
+      inv.life-=1;
       pos = oldpos;
       break;
-    case 'j': // Potion
-      const unsigned int n = std::rand()%2; // Type de la potion
-      Potion p = Potion(n);
-      p.store(inv);
+    
+    case 'Z':
+      inv.life -=1;
+      pos=oldpos;
       break;
-    }
+    case '=':
+      win=true;
+      break;
+    }}catch(std::exception & e) {}
 
-    screen = generate_frame(pos, background);
+    auto screen = generate_frame();
     backgroundClear();
     display(screen);
 
-    inv.printInventaire();
-    // std::cout << "$ = " << inv.gold << std::endl;
-    // std::cout << "life = " << inv.life << std::endl;
+    //inv.printInventaire();
+    std::cout << "$ = " << inv.gold << std::endl;
+    std::cout << "life = " << inv.life << std::endl;
+    std::cout << "life potions = " << life_potions << std::endl;
+
+  
 
     
   }

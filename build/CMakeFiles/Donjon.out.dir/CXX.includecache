@@ -49,6 +49,8 @@ display.h
 /home/simoncappe/dev/hackaton/HackatonMines/display.h
 items.h
 /home/simoncappe/dev/hackaton/HackatonMines/items.h
+cstdlib
+-
 ennemi.h
 /home/simoncappe/dev/hackaton/HackatonMines/ennemi.h
 cmath
