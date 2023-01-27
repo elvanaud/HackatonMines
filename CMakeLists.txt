@@ -15,7 +15,7 @@ add_compile_options(
 include_directories(include)
 add_subdirectory( src )
 
-add_executable(${PROJECT_NAME}.out main.cpp)
+add_executable(${PROJECT_NAME}.out main.cpp Game.cpp)
 target_link_libraries(${PROJECT_NAME}.out PUBLIC ${PROJECT_NAME})
 
 install(TARGETS ${PROJECT_NAME}.out DESTINATION bin)
