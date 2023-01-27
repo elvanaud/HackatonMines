@@ -2,7 +2,7 @@
 #include <vector>
 #include <deque>
 #include <utility>
-#include <conio.h>
+//#include <conio.h>
 #include <ctime>
 //#include "sys/ioctl.h"
 
