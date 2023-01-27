@@ -7,7 +7,7 @@
 #include <map>
 #include <iostream>
 
-struct Vect2{ // Volé au main mais amélioré
+struct Vect2{
     int x;
     int y;
     bool est_egal(Vect2 v)
