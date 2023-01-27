@@ -106,11 +106,16 @@ void display(const GridType& background){
 void Game::startGame()
 {
     int lap = 200;
+    int coin = 0;
+    int life = 5;
+    
     while(true)
     {
+        Vect2 oldpos = pos;
         if(internal::keyEvent())
         {
           char key = internal::getch();
+          
           
           update_dir(key);
           pos = update_wall_colision(pos,dir,background);
@@ -118,9 +123,26 @@ void Game::startGame()
         
         auto screen=generate_frame(pos,background);
         
-        backgroundClear();
-        display(screen);
-        internal::frameSleep(lap);
+        
+        
+        switch(background[pos.y][pos.x]){
+            case '*':
+                background[pos.y][pos.x]='.';
+                coin+=1;
+                break;
+            case 'K':
+                life-=1;
+                pos=oldpos;
+                break;
+
+            
+          }
+          
+          screen=generate_frame(pos,background);
+          backgroundClear();
+          display(screen);
+          std::cout<< "$ = "<<coin<<std::endl;
+          std::cout<< "life = "<<life <<std::endl;
     }
 
 }
