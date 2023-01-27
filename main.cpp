@@ -53,6 +53,40 @@ std::vector<int> backgroundSetup( const int& nx, const int& ny ){
   return bg; 
 }
 
+void maj_pos(const int x,const int y,std::vector<std::vector<char>>& frame){
+    int lx = frame.size();
+    int ly = frame[0].size();
+    /*if(frame[x][y]=='-' || frame[x][y]=='|' || frame[x][y]==' '){
+        
+    }*/
+    frame[x][y]='@';
+}
+void update_dir(int x, int y){
+    char key;
+    if( internal::keyEvent() ){
+        key = internal::getch();
+    }
+    switch( key ){
+        case  'q' :
+            x--;
+            break;
+        case  'd':
+            x++;
+            break;
+        case 'z':
+            y++;
+            break;
+        case 's':
+            y--;
+            break;
+    }
+
+
+    
+}
+
+
+
 int main(){
     const int nx = 50;
     const int ny = 25;
