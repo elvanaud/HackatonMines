@@ -3,6 +3,7 @@
 #include <iostream>
 #include "internals.h"
 #include "display.h"
+#include "items.h"
 
 void Game::processLevel()
 {
@@ -143,11 +144,10 @@ void display(const GridType &background)
 }
 void Game::startGame()
 {
+  Inventaire inv;
   int lap = 200;
-  int coin = 0;
-  int life = 5;
 
-  while (life>0)
+  while (inv.life>0)
   {
     internal::frameSleep(lap);
     Vect2 oldpos = pos;
@@ -165,10 +165,10 @@ void Game::startGame()
     {
     case '*':
       background[pos.y][pos.x] = '.';
-      coin += 1;
+      inv.gold += 1;
       break;
     case 'K':
-      life -= 1;
+      inv.life -= 1;
       pos = oldpos;
       break;
     }
@@ -176,8 +176,8 @@ void Game::startGame()
     screen = generate_frame(pos, background);
     backgroundClear();
     display(screen);
-    std::cout << "$ = " << coin << std::endl;
-    std::cout << "life = " << life << std::endl;
+    std::cout << "$ = " << inv.gold << std::endl;
+    std::cout << "life = " << inv.life << std::endl;
 
     
   }
