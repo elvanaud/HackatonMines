@@ -2,8 +2,7 @@
 #include <iostream>
 #include <vector>
 
-struct Vect2
-{ 
+ 
 struct Vect2{
     int x;
     int y;

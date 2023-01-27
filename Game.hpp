@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <string>
+#include "ennemi.h"
 
 struct Vect2{
     int x;
@@ -31,6 +32,8 @@ private:
   
   Vect2 pos{};
   Vect2 dir{};
+
+  std::vector<Ennemi> ennemis;
 };
 
 #endif

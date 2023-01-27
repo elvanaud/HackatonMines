@@ -4,22 +4,34 @@
 #include "internals.h"
 #include "display.h"
 #include "items.h"
+#include "ennemi.h"
 
 void Game::processLevel()
 {
-  bool player_not_found = true;
-  for (int y = 0; player_not_found && y < background.size(); y++)
-  {
-    for (int x = 0; player_not_found && x < background[y].size(); x++)
-    {
-      if (background[y][x] == '@')
-      {
-        player_not_found = false;
-        pos.x = x;
-        pos.y = y;
-        background[y][x] = '.';
+  bool player_not_found=true;
+  for(int y = 0; y<background.size();y++){
+      for(int x = 0; x<background[y].size();x++){
+          if(background[y][x]=='@'){
+              pos.x=x;
+              pos.y=y;
+              background[y][x]='.';
+          }
+          if (background[y][x] == 'Z'){
+            Zombie zombie;
+            zombie.pos.x = x;
+            zombie.pos.y = y;
+            zombie.symbol = 'Z';
+            ennemis.push_back(zombie);
+          }
+          if (background[y][x] == 'K'){
+            Kombie kombie;
+            kombie.pos.x = x;
+            kombie.pos.y = y;
+            kombie.symbol = 'K';
+            ennemis.push_back(kombie);
+            
+          }
       }
-    }
   }
 }
 
@@ -119,18 +131,19 @@ Vect2 update_wall_colision(Vect2 pos, Vect2 dir, const GridType &background)
   }
 }
 
-GridType generate_frame(Vect2 pos, const GridType &background)
-{
-  GridType screen = background;
-  try
-  {
-    screen.at(pos.y).at(pos.x) = '@';
-    return screen;
-  }
-  catch (std::exception &e)
-  {
-    return background;
-  }
+GridType Game::generate_frame(){
+    GridType screen = background;
+    try{
+        screen.at(pos.y).at(pos.x)='@';
+        for (auto ennemi: ennemis){
+          char symbol = ennemi.symbol;
+          screen.at(ennemi.pos.y).at(ennemi.pos.x) = symbol;
+        }
+        return screen;
+    }
+    catch(std::exception & e){
+        return background;
+    }
 }
 
 void display(const GridType &background)
