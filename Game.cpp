@@ -176,8 +176,10 @@ void Game::startGame()
     screen = generate_frame(pos, background);
     backgroundClear();
     display(screen);
-    std::cout << "$ = " << inv.gold << std::endl;
-    std::cout << "life = " << inv.life << std::endl;
+
+    inv.printInventaire()
+    // std::cout << "$ = " << inv.gold << std::endl;
+    // std::cout << "life = " << inv.life << std::endl;
 
     
   }
