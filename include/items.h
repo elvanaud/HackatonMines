@@ -25,19 +25,21 @@ class Inventaire
         this->life += increment;
     }
 
-    unsigned int life_max; // Vie maximale du héros 
-    unsigned int life; // Vie actuelle du héros
-    unsigned int gold; // Quantité d'or sur le héros
-    unsigned int strength; // Force du héros
-    unsigned int potions_vie;
-    unsigned int potions_force;
+    // Utilisation des potions ?
+
+    unsigned int life_max = 0; // Vie maximale du héros 
+    unsigned int life = 5; // Vie actuelle du héros
+    unsigned int gold = 0; // Quantité d'or sur le héros
+    unsigned int strength = 1; // Force du héros
+    unsigned int potions_vie = 0;
+    unsigned int potions_force = 0;
     // 0 : n'a pas ; 1 : a
-    unsigned int casque;
-    unsigned int armure;
-    unsigned int epee;
-    unsigned int bouclier;
-    std::string weapon; // Nom de l'arme
-    std::string armor; // Nom de l'armure
+    unsigned int casque = 0;
+    unsigned int armure = 0;
+    unsigned int epee = 0;
+    unsigned int bouclier = 0;
+    std::string weapon = ""; // Nom de l'arme
+    std::string armor = ""; // Nom de l'armure
 };
 
 class Gold
