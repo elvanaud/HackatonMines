@@ -165,10 +165,11 @@ void Game::startGame()
     {
     case '*':
       background[pos.y][pos.x] = '.';
-      inv.gold += 1;
+      Gold g = Gold(1);
+      g.store(inv);
       break;
     case 'K':
-      inv.life -= 1;
+      inv.change_life(-1);
       pos = oldpos;
       break;
     }

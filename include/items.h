@@ -27,7 +27,7 @@ class Inventaire
 
     // Utilisation des potions ?
 
-    unsigned int life_max = 0; // Vie maximale du héros 
+    unsigned int life_max = 5; // Vie maximale du héros 
     unsigned int life = 5; // Vie actuelle du héros
     unsigned int gold = 0; // Quantité d'or sur le héros
     unsigned int strength = 1; // Force du héros
