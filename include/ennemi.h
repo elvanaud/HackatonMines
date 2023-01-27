@@ -2,7 +2,7 @@
 #include <iostream>
 #include <vector>
 
-struct Vect2{ // Volé au main mais amélioré
+struct Vect2{
     int x;
     int y;
     bool est_egal(Vect2 v)
@@ -10,7 +10,6 @@ struct Vect2{ // Volé au main mais amélioré
         return (this->x == v.x) && (this->y == v.y);
     }
 };
-
 
 class Ennemi
 {
@@ -26,8 +25,7 @@ class Ennemi
 class Zombie : public Ennemi
 {
     unsigned int strength = 1;
-
-};
+    };
 
 
 
