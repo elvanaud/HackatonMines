@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <fstream>
 #include <deque>
 #include <utility>
 //#include <conio.h>
@@ -14,6 +15,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+
+using GridType = std::vector<std::vector<char>>;
 
 void startGame(int lap, const int nx, const int ny, std::vector<int> &bg){
     char key;
@@ -53,8 +56,35 @@ std::vector<int> backgroundSetup( const int& nx, const int& ny ){
   return bg; 
 }
 
+ 
+GridType read_level(const std::string& filename){
+  GridType background;
+  std::vector<char> line;
+  char ch;
+  std::fstream f(filename, std::fstream::in);
+  while (f >> std::noskipws >> ch){
+    if (ch == '\n'){
+      background.push_back(line);
+      line.clear();
+    }
+    else{
+      line.push_back(ch);
+    }
+  }
+  return background;
+}
+
+void display(const GridType& background){
+  for(auto & line : background)
+  {
+    for(char c : line)
+      std::cout << c;
+    std::cout << std::endl;
+  }
+}
+
 int main(){
-    const int nx = 50;
+    /*const int nx = 50;
     const int ny = 25;
     const int lap=200;//200
     srand(time(nullptr));
@@ -63,10 +93,13 @@ int main(){
     printFrame(nx,ny, background);
 
     
-    startGame(lap, nx, ny, background);
+    startGame(lap, nx, ny, background);*/
+
+    std::string filename = "../levels/level0.txt";
+    GridType background = read_level(filename);
+
+    display(background);
     
    return 0;
 }
-
-
 
