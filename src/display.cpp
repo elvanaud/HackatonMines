@@ -1,6 +1,14 @@
 #include "stdlib.h"
 #include <iostream>
 #include <vector>
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/time.h>
+#include <sys/types.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <termios.h>
+
 
 const char* cmd_clear="clear";
 
@@ -28,3 +36,7 @@ void printFrame(const int& nx, const int& ny, const std::vector<int>& bg){
         std::cout << std::endl;
     }
 }
+
+
+static struct termios oldSettings, newSettings;
+
