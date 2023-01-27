@@ -5,5 +5,23 @@
 
 class Ennemi
 {
+    protected :
+    
+
+    public :
+
+
+
+};
+
+class Zombie
+{
+
+};
+
+
+
+class Kombie
+{
 
 };
