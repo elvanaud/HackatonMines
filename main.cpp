@@ -9,12 +9,7 @@
 #include "internals.h"
 #include "display.h"
 
-struct Vect2{
-    int x;
-    int y;
-
-};
-using GridType = std::vector<std::vector<char>>;
+#include "Game.hpp"
 
 Vect2 update_wall_colision(Vect2 pos,Vect2 dir,const GridType& background){
     Vect2 newpos;
@@ -35,24 +30,6 @@ Vect2 update_wall_colision(Vect2 pos,Vect2 dir,const GridType& background){
     catch(std::exception & e)
     {
       return pos;
-    }
-}
-
-void update_dir(char key, Vect2& dir){
-    dir.x = dir.y = 0;
-    switch( key ){
-        case  'q' :
-            dir.x=-1;
-            break;
-        case  'd':
-            dir.x=+1;
-            break;
-        case 's':
-            dir.y=+1;
-            break;
-        case 'z':
-            dir.y=-1;
-            break;
     }
 }
  
@@ -91,39 +68,61 @@ GridType generate_frame(Vect2 pos,const GridType& background){
         return background;
     }
 }
-void startGame(const std::string& filename){
-    GridType background = read_level(filename);
-    
-    int lap = 200;
-    Vect2 pos{};
-    Vect2 dir{};
-    
-    bool player_not_found=true;
-    for(int y = 0; player_not_found && y<background.size();y++){
-        for(int x = 0;player_not_found && x<background[y].size();x++){
-            if(background[y][x]=='@'){
-                player_not_found=false;
-                pos.x=x;
-                pos.y=y;
-                background[y][x]='.';
-            }
-        }
+
+void Game::processLevel()
+{
+  bool player_not_found=true;
+  for(int y = 0; player_not_found && y<background.size();y++){
+      for(int x = 0;player_not_found && x<background[y].size();x++){
+          if(background[y][x]=='@'){
+              player_not_found=false;
+              pos.x=x;
+              pos.y=y;
+              background[y][x]='.';
+          }
+      }
+  }
+}
+
+Game::Game(const std::string& filename)
+{
+  background = read_level(filename);
+  processLevel();
+}
+
+void Game::update_dir(char key)
+{
+    dir.x = dir.y = 0;
+    switch( key ){
+        case  'q' :
+            dir.x=-1;
+            break;
+        case  'd':
+            dir.x=+1;
+            break;
+        case 's':
+            dir.y=+1;
+            break;
+        case 'z':
+            dir.y=-1;
+            break;
     }
-
-
-    while( true )
+}
+void Game::startGame()
+{
+    int lap = 200;
+    while(true)
     {
         if(internal::keyEvent())
         {
           char key = internal::getch();
-          update_dir(key, dir);
-          pos = update_wall_colision(pos,dir,background);
           
+          update_dir(key);
+          pos = update_wall_colision(pos,dir,background);
         }
         
-        
-        //update_dir(dir,pos,background);
         auto screen=generate_frame(pos,background);
+        
         backgroundClear();
         display(screen);
         internal::frameSleep(lap);
@@ -133,7 +132,9 @@ void startGame(const std::string& filename){
 
 int main(){
     std::string filename = "../levels/level0.txt";
-    startGame(filename);
+    
+    Game game(filename);
+    game.startGame();
    return 0;
 }
 
