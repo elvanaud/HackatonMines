@@ -14,7 +14,7 @@ int main(){
     Game game0=Game(filename);
     game0.startGame();
 
-    filename="../levels/level1.txt";
+    /*filename="../levels/level1.txt";
     Game game1 = Game(filename);
     game1.startGame();
 
@@ -28,7 +28,7 @@ int main(){
 
     filename="../levels/level4.txt";
     Game game4 = Game(filename);
-    game4.startGame();
+    game4.startGame();*/
 
 
 

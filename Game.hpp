@@ -32,6 +32,9 @@ private:
   Inventaire inv;
 
   std::vector<Ennemi> ennemis;
+  
+  int levelWidth = 0;
+  int levelHeight = 0;
 };
 
 #endif

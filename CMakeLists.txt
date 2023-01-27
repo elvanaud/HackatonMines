@@ -12,10 +12,16 @@ add_compile_options(
     -Wfatal-errors
 )
 
+set(SFML_DIR "../../../MesDocuments/Informatique/Ordinateur/Programmation/C++/Librairies/SFML/SFML-install/lib/cmake/SFML")
+find_package(SFML 2.5 COMPONENTS graphics REQUIRED)
+
+add_definitions(-DCMAKE_EXPORT_COMPILE_COMMANDS=ON)
+
 include_directories(include)
 add_subdirectory( src )
 
 add_executable(${PROJECT_NAME}.out main.cpp Game.cpp)
-target_link_libraries(${PROJECT_NAME}.out PUBLIC ${PROJECT_NAME})
+target_link_libraries(${PROJECT_NAME}.out  PUBLIC ${PROJECT_NAME} sfml-graphics)
+#target_link_libraries(${PROJECT_NAME}.out sfml-graphics)
 
 install(TARGETS ${PROJECT_NAME}.out DESTINATION bin)

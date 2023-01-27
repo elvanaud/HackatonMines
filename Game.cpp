@@ -8,10 +8,16 @@
 #include "ennemi.h"
 #include <cmath>
 
+#include <SFML/Graphics.hpp>
+
 void Game::processLevel()
 {
-  for(int y = 0; y<background.size();y++){
-      for(int x = 0; x<background[y].size();x++){
+  levelHeight = background.size();
+  
+  for(int y = 0; y < levelHeight; y++){
+      int currentWidth = background[y].size();
+      if(currentWidth >= levelWidth)  levelWidth = currentWidth;
+      for(int x = 0; x < currentWidth; x++){
           if(background[y][x]=='@'){
               pos.x=x;
               pos.y=y;
@@ -191,34 +197,46 @@ void Game::startGame()
   //Inventaire inv;
   int lap = 200;
 
-  while (inv.life>0 && win ==false)
+  //while (inv.life>0 && win ==false)
+  sf::RenderWindow app(sf::VideoMode(600,600,32), "Donjon");
+  while(app.isOpen())
   {
-    internal::frameSleep(lap);
+    //internal::frameSleep(lap);
     Vect2 oldpos = pos;
-    if (internal::keyEvent())
+    char key;
+    /*if (internal::keyEvent())
     {
       char key = internal::getch();
 
       update_dir(key);
       pos = update_wall_colision(pos, dir, background);
+    }*/
+    sf::Event e;
+    while(app.pollEvent(e))
+    {
+      switch(e.type)
+      {
+      case sf::Event::Closed: 
+        app.close();
+        break;
+      case sf::Event::TextEntered:
+        key = (char) e.text.unicode;
+        update_dir(key);
+        pos = update_wall_colision(pos, dir, background);
+        break;
+        default:;
+      }
     }
-
-   // auto screen = generate_frame();
-
-    //std::cout << pos.y << " " << pos.x << std::endl;
+    
     try{
     switch (background.at(pos.y).at(pos.x))
     {
     case '*':
-    
       background[pos.y][pos.x] = '.';
       inv.gold+=1;
       break;
-    
-      
     case 'j': // Potion
       inv.life_potions+=1;
-      
       background[pos.y][pos.x] = '.';
       break;
     case '=':
@@ -234,15 +252,49 @@ void Game::startGame()
     }
 
     auto screen = generate_frame();
-    backgroundClear();
-    display(screen);
+    //backgroundClear();
+    //display(screen);
 
     //inv.printInventaire();
-    std::cout << "$ = " << inv.gold << std::endl;
+    /*std::cout << "$ = " << inv.gold << std::endl;
     std::cout << "life = " << inv.life << std::endl;
-    std::cout << "life potions = " << inv.life_potions << std::endl;
+    std::cout << "life potions = " << inv.life_potions << std::endl;*/
 
-  
+    app.clear(sf::Color(170,185,185));
+    sf::RectangleShape tile(sf::Vector2f(16,16));
+    for(int y = 0; y < screen.size(); y++)
+    {
+      for(int x = 0; x < screen[y].size(); x++)
+      {
+        switch(screen[y][x])
+        {
+          case ' ': 
+            tile.setFillColor(sf::Color(170,185,185)); break;
+          case '|':
+          case '-':
+            tile.setFillColor(sf::Color::Red);
+            break;
+          case '*': 
+            tile.setFillColor(sf::Color::Yellow); break;
+          case 'K':
+            tile.setFillColor(sf::Color(50,200,120)); break;
+          case '@':
+            tile.setFillColor(sf::Color::Black); break;
+          case 'j':
+            tile.setFillColor(sf::Color(200,120,120)); break;
+          default:
+            tile.setFillColor(sf::Color::White); break;
+        }
+        tile.setPosition(x*16,y*16);
+        app.draw(tile);
+      }
+    }
+    
+    
+    //tile.setFillColor(sf::Color::Black);
+    //tile.setPosition(pos.x*16, pos.y*16);
+    //app.draw(tile);
+    app.display();
 
     
   }
