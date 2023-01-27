@@ -3,6 +3,7 @@
 #include <vector>
 
 
+
 class Ennemi
 {
     protected :
@@ -14,14 +15,15 @@ class Ennemi
 
 };
 
-class Zombie
+class Zombie : public Ennemi
 {
+    unsigned int strength = 1;
 
 };
 
 
 
-class Kombie
+class Kombie : public Ennemi
 {
 
 };
