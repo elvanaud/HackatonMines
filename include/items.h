@@ -24,7 +24,7 @@ class Inventaire
     { // L'incrément est algébrique
         this->life += increment;
     }
-
+    
     // Utilisation des potions ?
 
     unsigned int life_max = 5; // Vie maximale du héros 
@@ -40,6 +40,8 @@ class Inventaire
     unsigned int bouclier = 0;
     std::string weapon = ""; // Nom de l'arme
     std::string armor = ""; // Nom de l'armure
+
+    void printInventaire();
 };
 
 class Gold
