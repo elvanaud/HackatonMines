@@ -4,6 +4,7 @@
 
 struct Vect2
 { 
+struct Vect2{
     int x;
     int y;
     bool est_egal(Vect2 v)
@@ -11,7 +12,6 @@ struct Vect2
         return (this->x == v.x) && (this->y == v.y);
     }
 };
-
 
 class Ennemi
 {
@@ -34,8 +34,7 @@ class Zombie : public Ennemi
     unsigned int vitesse = 1;
 
     Vect2 pos;
-
-};
+    };
 
 
 
