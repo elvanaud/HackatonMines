@@ -1,0 +1,1 @@
+/usr/bin/g++  -g  -rdynamic CMakeFiles/Donjon.out.dir/main.cpp.o CMakeFiles/Donjon.out.dir/Game.cpp.o  -o Donjon.out  src/libDonjon.a 

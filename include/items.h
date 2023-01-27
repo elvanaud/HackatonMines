@@ -1,20 +1,13 @@
 // Code à ranger à la fin
 
 // Génération random d'items à faire à la fin si on a le temps
-
+#pragma once
 #include <string>
 #include <vector>
 #include <map>
 #include <iostream>
-
-struct Vect2{ // Volé au main mais amélioré
-    int x;
-    int y;
-    bool est_egal(Vect2 v)
-    {
-        return (this->x == v.x) && (this->y == v.y);
-    }
-};
+ 
+ #include "Vect2.hpp"
 
 class Inventaire
 { // Proposition : accéder aux potions de vie par une certaine touche, force par une autre, et 
@@ -33,19 +26,21 @@ class Inventaire
         }
     }
 
-    unsigned int life_max; // Vie maximale du héros 
-    unsigned int life; // Vie actuelle du héros
-    unsigned int gold; // Quantité d'or sur le héros
-    unsigned int strength; // Force du héros
-    unsigned int potions_vie;
-    unsigned int potions_force;
+    unsigned int life_max = 5; // Vie maximale du héros 
+    unsigned int life = 5; // Vie actuelle du héros
+    unsigned int gold = 0; // Quantité d'or sur le héros
+    unsigned int strength = 1; // Force du héros
+    unsigned int potions_vie = 0;
+    unsigned int potions_force = 0;
     // 0 : n'a pas ; 1 : a
-    unsigned int casque;
-    unsigned int armure;
-    unsigned int epee;
-    unsigned int bouclier;
-    std::string weapon; // Nom de l'arme
-    std::string armor; // Nom de l'armure
+    unsigned int casque = 0;
+    unsigned int armure = 0;
+    unsigned int epee = 0;
+    unsigned int bouclier = 0;
+    std::string weapon = ""; // Nom de l'arme
+    std::string armor = ""; // Nom de l'armure
+
+    void printInventaire();
 };
 
 class Gold
@@ -100,11 +95,3 @@ class Potion
 
 
 const std::map<short unsigned int, std::string> potion_type = {{0, "life"}, {1, "strenght"}};
-
-class Ennemi
-{
-    public:
-    
-
-    Vect2 pos;
-};

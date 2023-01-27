@@ -3,22 +3,34 @@
 #include <iostream>
 #include "internals.h"
 #include "display.h"
+#include "items.h"
+#include "ennemi.h"
 
 void Game::processLevel()
 {
-  bool player_not_found = true;
-  for (int y = 0; player_not_found && y < background.size(); y++)
-  {
-    for (int x = 0; player_not_found && x < background[y].size(); x++)
-    {
-      if (background[y][x] == '@')
-      {
-        player_not_found = false;
-        pos.x = x;
-        pos.y = y;
-        background[y][x] = '.';
+  for(int y = 0; y<background.size();y++){
+      for(int x = 0; x<background[y].size();x++){
+          if(background[y][x]=='@'){
+              pos.x=x;
+              pos.y=y;
+              background[y][x]='.';
+          }
+          if (background[y][x] == 'Z'){
+            Zombie zombie;
+            zombie.pos.x = x;
+            zombie.pos.y = y;
+            zombie.symbol = 'Z';
+            ennemis.push_back(zombie);
+          }
+          if (background[y][x] == 'K'){
+            Kombie kombie;
+            kombie.pos.x = x;
+            kombie.pos.y = y;
+            kombie.symbol = 'K';
+            ennemis.push_back(kombie);
+            
+          }
       }
-    }
   }
 }
 
@@ -128,18 +140,19 @@ Vect2 update_wall_colision(Vect2 pos, Vect2 dir, const GridType &background)
   }
 }
 
-GridType generate_frame(Vect2 pos, const GridType &background)
-{
-  GridType screen = background;
-  try
-  {
-    screen.at(pos.y).at(pos.x) = '@';
-    return screen;
-  }
-  catch (std::exception &e)
-  {
-    return background;
-  }
+GridType Game::generate_frame(){
+    GridType screen = background;
+    try{
+        screen.at(pos.y).at(pos.x)='@';
+        for (auto ennemi: ennemis){
+          char symbol = ennemi.symbol;
+          screen.at(ennemi.pos.y).at(ennemi.pos.x) = symbol;
+        }
+        return screen;
+    }
+    catch(std::exception & e){
+        return background;
+    }
 }
 
 void display(const GridType &background)
@@ -153,12 +166,12 @@ void display(const GridType &background)
 }
 void Game::startGame()
 {
-  life = 5;
-  life_potions = 0;
-  int lap = 200;
-  int coin = 0;
   bool win = false;
-  while (life>0 && win ==false)
+ // while (life>0 && win ==false)
+  Inventaire inv;
+  int lap = 200;
+
+  while (inv.life>0 && win ==false)
   {
     internal::frameSleep(lap);
     Vect2 oldpos = pos;
@@ -170,16 +183,22 @@ void Game::startGame()
       pos = update_wall_colision(pos, dir, background);
     }
 
-    auto screen = generate_frame(pos, background);
+   // auto screen = generate_frame();
 
-    switch (background[pos.y][pos.x])
+    //std::cout << pos.y << " " << pos.x << std::endl;
+    try{
+    switch (background.at(pos.y).at(pos.x))
     {
     case '*':
+    {
       background[pos.y][pos.x] = '.';
-      coin += 1;
+      Gold g = Gold(1);
+      g.store(inv);
+    }
+      
       break;
     case 'K':
-      life -= 1;
+      inv.change_life(-1);
       pos = oldpos;
       break;
     case 'Z':
@@ -195,17 +214,19 @@ void Game::startGame()
       break;
     
 
-    }
+    }}catch(std::exception & e) {}
 
-    screen = generate_frame(pos, background);
+    auto screen = generate_frame();
     backgroundClear();
     display(screen);
-    std::cout << "$ = " << coin << std::endl;
-    std::cout << "life = " << life << std::endl;
-    std::cout<< "life potions : "<< life_potions<<std::endl;
+
+    inv.printInventaire();
+    // std::cout << "$ = " << inv.gold << std::endl;
+    // std::cout << "life = " << inv.life << std::endl;
 
     
   }
+  
   std::cout<<';'<<std::endl;
   if(win){
     std::cout<< "YOU WIN"<<std::endl;

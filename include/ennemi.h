@@ -1,37 +1,40 @@
 #pragma once
 #include <iostream>
 #include <vector>
-
-struct Vect2{ // Volé au main mais amélioré
-    int x;
-    int y;
-    bool est_egal(Vect2 v)
-    {
-        return (this->x == v.x) && (this->y == v.y);
-    }
-};
-
+#include "items.h"
+#include "Vect2.hpp"
 
 class Ennemi
 {
     protected :
-    
+    unsigned int life;
+    unsigned int strength;
+    unsigned int vitesse;
 
     public :
 
+    void Deplacement(){ }
 
-    Vect2 pos;
+    Vect2 pos{};
+    char symbol;
 };
 
 class Zombie : public Ennemi
 {
+    public:
     unsigned int strength = 1;
-
+    unsigned int life = 2;
+    unsigned int vitesse = 1;
 };
 
 
 
 class Kombie : public Ennemi
 {
+    public:
+    unsigned int strength = 2;
+    unsigned int life = 4;
+    unsigned int vitesse = 1;
 
 };
+
