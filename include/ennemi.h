@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 #include "items.h"
+#include "Vect2.hpp"
 
 class Ennemi
 {
@@ -25,27 +26,26 @@ class Ennemi
         }
     }
 
-    Vect2 pos;
+    Vect2 pos{};
+    char symbol;
 };
 
 class Zombie : public Ennemi
 {
+    public:
     unsigned int strength = 1;
     unsigned int life = 2;
     unsigned int vitesse = 1;
-
-    Vect2 pos;
-    };
+};
 
 
 
 class Kombie : public Ennemi
 {
+    public:
     unsigned int strength = 2;
     unsigned int life = 4;
     unsigned int vitesse = 1;
-
-    Vect2 pos;
 
 };
 

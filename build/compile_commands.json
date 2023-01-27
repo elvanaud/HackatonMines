@@ -1,0 +1,32 @@
+[
+{
+  "directory": "/home/simoncappe/dev/hackaton/HackatonMines/build",
+  "command": "/usr/bin/g++   -I/home/simoncappe/dev/hackaton/HackatonMines/include  -g   -Wall -Wextra -Wshadow -Wnon-virtual-dtor -Wfatal-errors -std=gnu++2a -o CMakeFiles/Donjon.out.dir/main.cpp.o -c /home/simoncappe/dev/hackaton/HackatonMines/main.cpp",
+  "file": "/home/simoncappe/dev/hackaton/HackatonMines/main.cpp"
+},
+{
+  "directory": "/home/simoncappe/dev/hackaton/HackatonMines/build",
+  "command": "/usr/bin/g++   -I/home/simoncappe/dev/hackaton/HackatonMines/include  -g   -Wall -Wextra -Wshadow -Wnon-virtual-dtor -Wfatal-errors -std=gnu++2a -o CMakeFiles/Donjon.out.dir/Game.cpp.o -c /home/simoncappe/dev/hackaton/HackatonMines/Game.cpp",
+  "file": "/home/simoncappe/dev/hackaton/HackatonMines/Game.cpp"
+},
+{
+  "directory": "/home/simoncappe/dev/hackaton/HackatonMines/build/src",
+  "command": "/usr/bin/g++   -I/home/simoncappe/dev/hackaton/HackatonMines/include  -g   -Wall -Wextra -Wshadow -Wnon-virtual-dtor -Wfatal-errors -std=gnu++2a -o CMakeFiles/Donjon.dir/display.cpp.o -c /home/simoncappe/dev/hackaton/HackatonMines/src/display.cpp",
+  "file": "/home/simoncappe/dev/hackaton/HackatonMines/src/display.cpp"
+},
+{
+  "directory": "/home/simoncappe/dev/hackaton/HackatonMines/build/src",
+  "command": "/usr/bin/g++   -I/home/simoncappe/dev/hackaton/HackatonMines/include  -g   -Wall -Wextra -Wshadow -Wnon-virtual-dtor -Wfatal-errors -std=gnu++2a -o CMakeFiles/Donjon.dir/ennemi.cpp.o -c /home/simoncappe/dev/hackaton/HackatonMines/src/ennemi.cpp",
+  "file": "/home/simoncappe/dev/hackaton/HackatonMines/src/ennemi.cpp"
+},
+{
+  "directory": "/home/simoncappe/dev/hackaton/HackatonMines/build/src",
+  "command": "/usr/bin/g++   -I/home/simoncappe/dev/hackaton/HackatonMines/include  -g   -Wall -Wextra -Wshadow -Wnon-virtual-dtor -Wfatal-errors -std=gnu++2a -o CMakeFiles/Donjon.dir/internals.cpp.o -c /home/simoncappe/dev/hackaton/HackatonMines/src/internals.cpp",
+  "file": "/home/simoncappe/dev/hackaton/HackatonMines/src/internals.cpp"
+},
+{
+  "directory": "/home/simoncappe/dev/hackaton/HackatonMines/build/src",
+  "command": "/usr/bin/g++   -I/home/simoncappe/dev/hackaton/HackatonMines/include  -g   -Wall -Wextra -Wshadow -Wnon-virtual-dtor -Wfatal-errors -std=gnu++2a -o CMakeFiles/Donjon.dir/items.cpp.o -c /home/simoncappe/dev/hackaton/HackatonMines/src/items.cpp",
+  "file": "/home/simoncappe/dev/hackaton/HackatonMines/src/items.cpp"
+}
+]

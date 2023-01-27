@@ -1,20 +1,13 @@
 // Code à ranger à la fin
 
 // Génération random d'items à faire à la fin si on a le temps
-
+#pragma once
 #include <string>
 #include <vector>
 #include <map>
 #include <iostream>
-
-struct Vect2{
-    int x;
-    int y;
-    bool est_egal(Vect2 v)
-    {
-        return (this->x == v.x) && (this->y == v.y);
-    }
-};
+ 
+ #include "Vect2.hpp"
 
 class Inventaire
 { // Proposition : accéder aux potions de vie par une certaine touche, force par une autre, et 
@@ -24,8 +17,14 @@ class Inventaire
     { // L'incrément est algébrique
         this->life += increment;
     }
-    
-    // Utilisation des potions ?
+    void game_over()
+    {
+        if(this->life <= 0)
+        {
+            // Commande de fin du jeu
+            std::cout << "Game Over...";
+        }
+    }
 
     unsigned int life_max = 5; // Vie maximale du héros 
     unsigned int life = 5; // Vie actuelle du héros

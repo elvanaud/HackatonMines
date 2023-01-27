@@ -1,0 +1,2 @@
+/usr/bin/ar qc libDonjon.a  CMakeFiles/Donjon.dir/display.cpp.o CMakeFiles/Donjon.dir/ennemi.cpp.o CMakeFiles/Donjon.dir/internals.cpp.o CMakeFiles/Donjon.dir/items.cpp.o
+/usr/bin/ranlib libDonjon.a
