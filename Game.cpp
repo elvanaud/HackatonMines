@@ -178,9 +178,12 @@ void Game::startGame()
     switch (background.at(pos.y).at(pos.x))
     {
     case '*':
+    {
       background[pos.y][pos.x] = '.';
       Gold g = Gold(1);
       g.store(inv);
+    }
+      
       break;
     case 'K':
       inv.change_life(-1);
