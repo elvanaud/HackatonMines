@@ -47,7 +47,7 @@ class Inventaire
 class Gold
 {
     public:
-    Gold(const unsigned int& a) : amount(a) {};
+    Gold(const unsigned int& a) : amount(a) {}
     int get_amount()
     {
         return this->amount;
@@ -71,6 +71,8 @@ class Gold
 
 class Potion
 {
+    public:
+    Potion(const int& n) : type(n) {}
     void store(Inventaire inv)
     {
         int n = this->type;

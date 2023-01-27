@@ -4,6 +4,7 @@
 #include "internals.h"
 #include "display.h"
 #include "items.h"
+#include <cstdlib>
 
 void Game::processLevel()
 {
@@ -171,6 +172,11 @@ void Game::startGame()
     case 'K':
       inv.change_life(-1);
       pos = oldpos;
+      break;
+    case 'j': // Potion
+      const unsigned int n = std::rand()%2; // Type de la potion
+      Potion p = Potion(n);
+      p.store(inv);
       break;
     }
 
