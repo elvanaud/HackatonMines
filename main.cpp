@@ -66,6 +66,23 @@ void maj_pos(Vect2 pos,std::vector<std::vector<char>>& frame){
     }*/
     frame[pos.x][pos.y]='@';
 }
+Vect2 update_wall_colision(Vect2 pos,Vect2 dir,std::vector<std::vector<char>>& frame){
+    Vect2 newpos;
+    newpos.x =pos.x+dir.x;
+    newpos.y=pos.y+dir.y;
+    switch(frame[newpos.x][newpos.y]){
+        case '-':
+            newpos=pos;
+            break;
+        case '|':
+            newpos=pos;
+            break;
+        case ' ':
+            newpos=pos;    
+    }
+    return newpos;
+}
+
 void update_dir(Vect2& dir ,Vect2 pos,std::vector<std::vector<char>> frame){
     char key;
     if( internal::keyEvent() ){
@@ -85,24 +102,8 @@ void update_dir(Vect2& dir ,Vect2 pos,std::vector<std::vector<char>> frame){
             dir.y=-1;
             break;
     }
-    pos = update_wall_colision(pos,dir,std::vector<std::vector<char>>& frame);
+    pos = update_wall_colision(pos,dir,frame);
 
-}
-Vect2 update_wall_colision(Vect2 pos,Vect2 dir,std::vector<std::vector<char>>& frame){
-    Vect2 newpos;
-    newpos.x =pos.x+dir.x;
-    newpos.y=pos.y+dir.y;
-    switch(frame[newpos.x][newpos.y]){
-        case '-':
-            newpos=pos;
-            break;
-        case '|':
-            newpos=pos;
-            break;
-        case ' ':
-            newpos=pos;    
-    }
-    return newpos;
 }
 
 
