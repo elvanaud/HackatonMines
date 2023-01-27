@@ -26,6 +26,8 @@ private:
   GridType read_level(const std::string& filename);
   
   GridType background;
+
+  void attack_enemy();
   
   Vect2 pos{};
   Vect2 dir{};
