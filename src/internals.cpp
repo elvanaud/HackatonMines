@@ -13,6 +13,9 @@
 #include "termios.h"
 #include <sys/select.h>
 #include <termios.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
 #endif
 
 #include "stdio.h"
