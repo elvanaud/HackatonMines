@@ -5,6 +5,7 @@
 #include "display.h"
 #include "items.h"
 #include "ennemi.h"
+#include <cmath>
 
 void Game::processLevel()
 {
@@ -20,6 +21,7 @@ void Game::processLevel()
             zombie.pos.x = x;
             zombie.pos.y = y;
             zombie.symbol = 'Z';
+            background[y][x] = '.';
             ennemis.push_back(zombie);
           }
           if (background[y][x] == 'K'){
@@ -27,6 +29,7 @@ void Game::processLevel()
             kombie.pos.x = x;
             kombie.pos.y = y;
             kombie.symbol = 'K';
+            background[y][x] = '.';
             ennemis.push_back(kombie);
             
           }
@@ -65,7 +68,7 @@ void Game::attack_enemy(){
   int j = pos.x;
   int i = pos.y;
   
-  if(background.at(i-1).at(j)=='K' || background.at(i-1).at(j)=='Z'){
+  /*if(background.at(i-1).at(j)=='K' || background.at(i-1).at(j)=='Z'){
     background[i-1][j]='.';
   }
   else if (background.at(i+1).at(j)=='K' || background.at(i+1).at(j)=='Z'){
@@ -76,6 +79,22 @@ void Game::attack_enemy(){
   }
   else if (background.at(i).at(j+1)=='K' || background.at(i).at(j+1)=='Z'){
     background[i][j+1]='.';
+  }*/
+
+  int removeEnemy = -1;
+  for(int i = 0; i < ennemis.size(); i++)
+  {
+    Ennemi e = ennemis[i];
+    int dist = std::pow(pos.x - e.pos.x,2)+std::pow(pos.y - e.pos.y,2);
+    if(dist == 1)
+    {
+      removeEnemy = i;
+      break;
+    }
+  }
+  if(removeEnemy != -1)
+  {
+    ennemis.erase(ennemis.begin() + removeEnemy);
   }
   
 };
