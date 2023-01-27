@@ -24,14 +24,6 @@ class Inventaire
     { // L'incrément est algébrique
         this->life += increment;
     }
-    void game_over()
-    {
-        if(this->life <= 0)
-        {
-            // Commande de fin du jeu
-            std::cout << "Game Over..."
-        }
-    }
 
     unsigned int life_max; // Vie maximale du héros 
     unsigned int life; // Vie actuelle du héros
@@ -100,11 +92,3 @@ class Potion
 
 
 const std::map<short unsigned int, std::string> potion_type = {{0, "life"}, {1, "strenght"}};
-
-class Ennemi
-{
-    public:
-    
-
-    Vect2 pos;
-};
