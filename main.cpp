@@ -12,10 +12,10 @@
 struct Vect2{
     int x;
     int y;
-};
-
-class Game{
-
+    bool est_egal(Vect2 v)
+    {
+        return (this->x == v.x) && (this->y == v.y);
+    }
 };
 
 using GridType = std::vector<std::vector<char>>;

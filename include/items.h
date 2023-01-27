@@ -6,13 +6,27 @@
 #include <vector>
 #include <map>
 
+struct Vect2{ // Volé au main mais amélioré
+    int x;
+    int y;
+    bool est_egal(Vect2 v)
+    {
+        return (this->x == v.x) && (this->y == v.y);
+    }
+};
+
 class Inventaire
 { // Proposition : accéder aux potions de vie par une certaine touche, force par une autre, et 
 // Afficher quelque part sur l'écran le nombre de chaque potion en temps réel.
     public:
-    /*
-    Ouvrir l'inventaire, sélectionner un objet ou quitter, utiliser l'objet
-    */
+    void change_life()
+    {
+
+    }
+    void game_over()
+    {
+
+    }
 
     unsigned int life_max; // Vie maximale du héros 
     unsigned int life; // Vie actuelle du héros
@@ -20,24 +34,16 @@ class Inventaire
     unsigned int strength; // Force du héros
     unsigned int potions_vie;
     unsigned int potions_force;
-    std::string armor;
-    std::string weapon;
+    // 0 : n'a pas ; 1 : a
+    unsigned int casque;
+    unsigned int armure;
+    unsigned int epee;
+    unsigned int bouclier;
+    std::string weapon; // Nom de l'arme
+    std::string armor; // Nom de l'armure
 };
 
-class Item
-{
-
-    public:
-    /*
-    Prendre l'item
-    */
-    void take(Item i);
-
-    std::string name;
-    std::pair<int,int> coord;
-};
-
-class Gold : public Item
+class Gold
 {
     public:
     Gold(const unsigned int& a) : amount(a) {};
@@ -50,11 +56,19 @@ class Gold : public Item
         int a = this->get_amount();
         inv.gold += a;
     }
+    void take(Vect2 pos, Inventaire inv)
+    {
+        if( pos.est_egal(this->coord) )
+        { // coordonnées joueur == coordonnées Item
+            store(inv);
+        }
+    }
+    Vect2 coord;
     private:
     unsigned int amount;
 };
 
-class Potion : public Item
+class Potion
 {
     void store(Inventaire inv)
     {
@@ -68,30 +82,17 @@ class Potion : public Item
             inv.potions_force += 1;
         }
     }
+    void take(Vect2 pos, Inventaire inv)
+    {
+        if( pos.est_egal(this->coord) )
+        { // coordonnées joueur == coordonnées Item
+            store(inv);
+        }
+    }
     int type; // 0 : vie, 1 : force
+    Vect2 coord;
 };
 
 
-// Classe Inventaire
-
-
-
-// Classe Item
-
-void Item::take(Item i)
-{
-    if(/*coordonnées joueur == coordonnées Item*/ 0)
-    {
-        // Ranger l'item dans l'inventaire
-    }
-}
-
-
-
-// Classe Gold
-
-
-
-// Classe Potion
 
 const std::map<short unsigned int, std::string> potion_type = {{0, "life"}, {1, "strenght"}};
