@@ -2,7 +2,7 @@
 #include <vector>
 #include <deque>
 #include <utility>
-#include <conio.h>
+//#include <conio.h>
 #include <ctime>
 //#include "sys/ioctl.h"
 
@@ -11,6 +11,11 @@
 #include "internals.h"
 #include "display.h"
 #include "food.h"
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <sys/select.h>
+#include <termios.h>
 
 
 std::vector<int> backgroundSetup( const int& nx, const int& ny ){
@@ -78,6 +83,17 @@ bool verifyBorder(std::deque<std::pair<int,int>>& snake, const int& nx, const in
   return !((x == 0) || (x == (nx-1)) || (y == 0) || (y == (ny-1)));
 }
 
+int getch()
+{
+    int r;
+    unsigned char c;
+    if ((r = read(0, &c, sizeof(c))) < 0) {
+        return r;
+    } else {
+        return c;
+    }
+}
+
 std::deque<std::pair<int,int>> setupSnake( const int snake_len ){
   std::deque<std::pair<int,int>> snake;
   std::pair<int,int> p = {25,12};
@@ -107,7 +123,9 @@ void startGame(const int& lap, const int& nx, const int& ny, int & snl, std::deq
         internal::frameSleep(lap);
         if( internal::keyEvent() ){
             //std::cin >> key; 
-            key = _getch();//std::cin.get();
+            //key = _getch();
+            //key = std::cin.get();
+            key = getch();
             snake_movement(key, dxdy);
         }
         backgroundClear();
@@ -134,7 +152,7 @@ void startGame(const int& lap, const int& nx, const int& ny, int & snl, std::deq
 int main(){
     const int nx = 50;
     const int ny = 25;
-    const int lap=20;//200
+    const int lap=200;//200
 
     int snake_len = 3;
     srand(time(nullptr));
