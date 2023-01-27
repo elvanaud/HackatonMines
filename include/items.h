@@ -30,7 +30,7 @@ class Inventaire
     unsigned int life = 5; // Vie actuelle du héros
     unsigned int gold = 0; // Quantité d'or sur le héros
     unsigned int strength = 1; // Force du héros
-    unsigned int potions_vie = 0;
+    unsigned int life_potions = 0;
     unsigned int potions_force = 0;
     // 0 : n'a pas ; 1 : a
     unsigned int casque = 0;
@@ -77,7 +77,7 @@ class Potion
         int n = this->type;
         if(n==0)
         { // Potion de vie
-            inv.potions_vie += 1;
+            inv.life_potions += 1;
         }
         else if(n==1)
         { // Potion de force

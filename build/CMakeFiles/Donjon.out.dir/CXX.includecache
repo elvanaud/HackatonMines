@@ -66,3 +66,11 @@ ennemi.h
 Vect2.hpp
 /home/simoncappe/dev/hackaton/HackatonMines/Vect2.hpp
 
+/home/simoncappe/dev/hackaton/HackatonMines/main.cpp
+stdlib.h
+/home/simoncappe/dev/hackaton/HackatonMines/stdlib.h
+internals.h
+/home/simoncappe/dev/hackaton/HackatonMines/internals.h
+Game.hpp
+/home/simoncappe/dev/hackaton/HackatonMines/Game.hpp
+

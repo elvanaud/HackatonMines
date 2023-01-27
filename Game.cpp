@@ -101,9 +101,9 @@ void Game::attack_enemy(){
 };
 
 void Game::drink_lifepotion(){
-  if(life<5 && life_potions>0){
-    life++;
-    life_potions--;
+  if(inv.life<5 && inv.life_potions>0){
+    inv.life++;
+    inv.life_potions--;
   }
 }
 
@@ -188,7 +188,7 @@ void Game::startGame()
 {
   bool win = false;
  // while (life>0 && win ==false)
-  Inventaire inv;
+  //Inventaire inv;
   int lap = 200;
 
   while (inv.life>0 && win ==false)
@@ -210,29 +210,28 @@ void Game::startGame()
     switch (background.at(pos.y).at(pos.x))
     {
     case '*':
-    {
+    
       background[pos.y][pos.x] = '.';
       inv.gold+=1;
-    }
-      
-      break;
-    case 'j': // Potion
-      life_potions-=1;
-      inv.life+=1;
-      background[pos.y][pos.x] = '.';
-    case 'K':
-      inv.life-=1;
-      pos = oldpos;
       break;
     
-    case 'Z':
-      inv.life -=1;
-      pos=oldpos;
+      
+    case 'j': // Potion
+      inv.life_potions+=1;
+      
+      background[pos.y][pos.x] = '.';
       break;
     case '=':
       win=true;
       break;
     }}catch(std::exception & e) {}
+
+    for(auto vilain : ennemis){
+      if(pos.x==vilain.pos.x && pos.y ==vilain.pos.y){
+        inv.life-=1;
+        pos=oldpos;
+      }
+    }
 
     auto screen = generate_frame();
     backgroundClear();
@@ -241,7 +240,7 @@ void Game::startGame()
     //inv.printInventaire();
     std::cout << "$ = " << inv.gold << std::endl;
     std::cout << "life = " << inv.life << std::endl;
-    std::cout << "life potions = " << life_potions << std::endl;
+    std::cout << "life potions = " << inv.life_potions << std::endl;
 
   
 

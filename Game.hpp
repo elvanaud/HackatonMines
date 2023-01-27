@@ -27,8 +27,9 @@ private:
   
   Vect2 pos{};
   Vect2 dir{};
-  int life=5;
-  int life_potions=0;
+  //int life=5;
+  //int life_potions=0;
+  Inventaire inv;
 
   std::vector<Ennemi> ennemis;
 };
