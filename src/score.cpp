@@ -1,7 +1,7 @@
 #include <vector>
 #include <fstream>
 #include <iostream>
-#include "include/items.h"
+#include "../include/items.h"
 
 Inventaire inventaire;
 
@@ -17,11 +17,11 @@ std::string printInventaire()
     //std::string strength = inventaire.strength;    
 
     std::string LifeBar = "";
-    for(i=0;i<=pv;i++)
+    for(int i=0;i<=pv;i++)
     {
         LifeBar + 'o' ;
     }
-    for(i=0;i<=life_max - pv;i++)
+    for(int i=0;i<=life_max - pv;i++)
     {
         LifeBar + '-';
     }

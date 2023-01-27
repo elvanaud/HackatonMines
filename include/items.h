@@ -20,6 +20,8 @@ class Inventaire
     unsigned int strength; // Force du héros
     unsigned int potions_vie;
     unsigned int potions_force;
+    std::string armor;
+    std::string weapon;
 };
 
 class Item
