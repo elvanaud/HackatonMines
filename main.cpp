@@ -3,19 +3,11 @@
 #include <fstream>
 #include <deque>
 #include <utility>
-//#include <conio.h>
 #include <ctime>
-//#include "sys/ioctl.h"
-
 #include "stdlib.h"
 
 #include "internals.h"
 #include "display.h"
-#include "food.h"
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-
 
 struct Vect2{
     int x;
@@ -40,26 +32,6 @@ void startGame(int lap, const int nx, const int ny, std::vector<int> &bg){
             exit(1);
         }*/
     }
-}
-
-std::vector<int> backgroundSetup( const int& nx, const int& ny ){
-  std::vector<int> bg(nx*ny, 0);
-  int i;
-  for( i=0; i<nx; i++){
-      bg[i] = 1;
-  }
-  for( i=0; i<nx; i++){
-      bg[(ny-1)*nx + i] = 1;
-  }
-  for( i=0; i<ny; i++){
-      bg[i*nx] = 1;
-  }
-  for( i=0; i<ny; i++){
-      bg[i*nx+nx-1] = 1;
-  }
-
-
-  return bg; 
 }
 
 void maj_pos(Vect2 pos,std::vector<std::vector<char>>& frame){
@@ -107,9 +79,6 @@ void update_dir(Vect2& dir ,Vect2 pos,std::vector<std::vector<char>> frame){
     pos = update_wall_colision(pos,dir,frame);
 
 }
-
-
-
  
 GridType read_level(const std::string& filename){
   GridType background;
@@ -138,17 +107,6 @@ void display(const GridType& background){
 }
 
 int main(){
-    /*const int nx = 50;
-    const int ny = 25;
-    const int lap=200;//200
-    srand(time(nullptr));
-    
-    std::vector<int> background = backgroundSetup(nx, ny);
-    printFrame(nx,ny, background);
-
-    
-    startGame(lap, nx, ny, background);*/
-
     std::string filename = "../levels/level0.txt";
     GridType background = read_level(filename);
 

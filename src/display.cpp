@@ -7,7 +7,6 @@
 #include <sys/types.h>
 #include <unistd.h>
 #include <fcntl.h>
-#include <termios.h>
 
 
 const char* cmd_clear="clear";
@@ -37,6 +36,4 @@ void printFrame(const int& nx, const int& ny, const std::vector<int>& bg){
     }
 }
 
-
-static struct termios oldSettings, newSettings;
 
