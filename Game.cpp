@@ -4,6 +4,7 @@
 #include "internals.h"
 #include "display.h"
 #include "items.h"
+#include <cstdlib>
 #include "ennemi.h"
 #include <cmath>
 
@@ -220,22 +221,14 @@ void Game::startGame()
       inv.change_life(-1);
       pos = oldpos;
       break;
-    case 'Z':
-      life -=1;
-      pos=oldpos;
+    case 'j': // Potion
+      const unsigned int n = std::rand()%2; // Type de la potion
+      Potion p = Potion(n);
+      p.store(inv);
       break;
-    case 'j':
-      life_potions+=1;
-      background[pos.y][pos.x] = '.';
-      break;
-    case '=':
-      win = true;
-      break;
-    
+    }
 
-    }}catch(std::exception & e) {}
-
-    auto screen = generate_frame();
+    screen = generate_frame(pos, background);
     backgroundClear();
     display(screen);
 

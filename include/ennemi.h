@@ -12,8 +12,19 @@ class Ennemi
     unsigned int vitesse;
 
     public :
-
-    void Deplacement(){ }
+    ~Ennemi() // Destructeur
+    {
+        // instruction pour virer le 'K' ou 'Z' de la map
+    }
+    void Deplacement() {}
+    void subir_degat(Inventaire inv)
+    {
+        this->life -= inv.strength;
+        if(this->life <= 0)
+        {
+            
+        }
+    }
 
     Vect2 pos{};
     char symbol;
