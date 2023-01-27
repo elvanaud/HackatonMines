@@ -19,9 +19,14 @@ class Inventaire
 { // Proposition : accéder aux potions de vie par une certaine touche, force par une autre, et 
 // Afficher quelque part sur l'écran le nombre de chaque potion en temps réel.
     public:
-    /*
-    Ouvrir l'inventaire, sélectionner un objet ou quitter, utiliser l'objet
-    */
+    void change_life()
+    {
+
+    }
+    void game_over()
+    {
+
+    }
 
     unsigned int life_max; // Vie maximale du héros 
     unsigned int life; // Vie actuelle du héros
@@ -34,6 +39,8 @@ class Inventaire
     unsigned int armure;
     unsigned int epee;
     unsigned int bouclier;
+    std::string weapon; // Nom de l'arme
+    std::string armor; // Nom de l'armure
 };
 
 class Gold
@@ -49,7 +56,7 @@ class Gold
         int a = this->get_amount();
         inv.gold += a;
     }
-    void Gold::take(Vect2 pos, Inventaire inv)
+    void take(Vect2 pos, Inventaire inv)
     {
         if( pos.est_egal(this->coord) )
         { // coordonnées joueur == coordonnées Item
@@ -75,7 +82,7 @@ class Potion
             inv.potions_force += 1;
         }
     }
-    void Potion::take(Vect2 pos, Inventaire inv)
+    void take(Vect2 pos, Inventaire inv)
     {
         if( pos.est_egal(this->coord) )
         { // coordonnées joueur == coordonnées Item
