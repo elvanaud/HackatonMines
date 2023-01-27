@@ -5,7 +5,7 @@
 
 Inventaire inventaire;
 
-std::string printInventaire()
+void printInventaire()
 {
     unsigned int money = inventaire.gold;
     unsigned int pv = inventaire.life;  // faire attention que les méthodes sont bien les bonnes
@@ -27,10 +27,10 @@ std::string printInventaire()
     }
 
 
-    std::cout << "___________________________" << std::endl ;
-    std::cout << " PV : " << LifeBar << std::endl << " *" << money << std::endl ;
+    std::cout << "_____________________________" << std::endl ;
+    std::cout << " PV : " << LifeBar << std::endl << " * : " << money << std::endl ;
     std::cout << " Armes : " << weapon << std::endl << " Armures : " << armor << std::endl << " Potions   " << "vie : " << potion_vie << "    force : " << potion_force << std::endl ;
-    std::cout << "___________________________" << std::endl ;
+    std::cout << "_____________________________" << std::endl ;
  
 }
     
