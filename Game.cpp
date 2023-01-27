@@ -68,6 +68,13 @@ void Game::attack_enemy(){
   
 };
 
+void Game::drink_lifepotion(){
+  if(life<5 && life_potions>0){
+    life++;
+    life_potions--;
+  }
+}
+
 void Game::update_dir(char key)
 {
   dir.x = dir.y = 0;
@@ -88,6 +95,9 @@ void Game::update_dir(char key)
   case ' ':
     attack_enemy();
     break;
+  case 'p':
+    drink_lifepotion();
+  
   }
 }
 
@@ -143,11 +153,12 @@ void display(const GridType &background)
 }
 void Game::startGame()
 {
+  life = 5;
+  life_potions = 0;
   int lap = 200;
   int coin = 0;
-  int life = 5;
-
-  while (life>0)
+  bool win = false;
+  while (life>0 && win ==false)
   {
     internal::frameSleep(lap);
     Vect2 oldpos = pos;
@@ -171,6 +182,19 @@ void Game::startGame()
       life -= 1;
       pos = oldpos;
       break;
+    case 'Z':
+      life -=1;
+      pos=oldpos;
+      break;
+    case 'j':
+      life_potions+=1;
+      background[pos.y][pos.x] = '.';
+      break;
+    case '=':
+      win = true;
+      break;
+    
+
     }
 
     screen = generate_frame(pos, background);
@@ -178,10 +202,15 @@ void Game::startGame()
     display(screen);
     std::cout << "$ = " << coin << std::endl;
     std::cout << "life = " << life << std::endl;
+    std::cout<< "life potions : "<< life_potions<<std::endl;
 
     
   }
   std::cout<<';'<<std::endl;
-
+  if(win){
+    std::cout<< "YOU WIN"<<std::endl;
+  }
+  else{
   std::cout<< "GAME OVER"<<std::endl;
+  }
 }

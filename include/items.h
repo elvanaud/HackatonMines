@@ -29,7 +29,7 @@ class Inventaire
         if(this->life <= 0)
         {
             // Commande de fin du jeu
-            std::cout << "Game Over..."
+            std::cout << "Game Over...";
         }
     }
 

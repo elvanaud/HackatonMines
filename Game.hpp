@@ -24,13 +24,18 @@ private:
   void processLevel();
   void update_dir(char key);
   GridType read_level(const std::string& filename);
+
+  bool game_over = false;
   
   GridType background;
 
   void attack_enemy();
+  void drink_lifepotion();
   
   Vect2 pos{};
   Vect2 dir{};
+  int life=5;
+  int life_potions=0;
 };
 
 #endif
