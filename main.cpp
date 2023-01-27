@@ -16,61 +16,29 @@ struct Vect2{
 };
 using GridType = std::vector<std::vector<char>>;
 
-void startGame(int lap, const int nx, const int ny, std::vector<int> &bg){
-    char key;
-    while( true ){
-        internal::frameSleep(lap);
-        if( internal::keyEvent() ){
-            key = internal::getch();
-        }
-        backgroundClear();
-        printFrame(nx, ny, bg);
-        
-        /*bool out =  verifyBorder(snake, nx, ny);
-        if( out == false){
-            std::cerr << "" << std::endl;
-            exit(1);
-        }*/
-    }
-}
 Vect2 update_wall_colision(Vect2 pos,Vect2 dir,const GridType& background){
     Vect2 newpos;
-    newpos.x =pos.x+dir.x;
-    newpos.y=pos.y+dir.y;
+    newpos.x = pos.x + dir.x;
+    newpos.y = pos.y + dir.y;
 
-    int ly = background.size();
-    int lx = background[0].size();
-    //if(pos.x<lx && pos.y <ly && pos.x>=0 && pos.y>=0){
     try{
       char cell = background.at(newpos.y).at(newpos.x);
       switch(cell){
         case '-':
-            newpos=pos;
-            break;
         case '|':
-            newpos=pos;
-            break;
         case ' ':
-            newpos=pos;    
+            return pos;
+        default: ;
       }
-    return newpos;
+      return newpos;
     }
     catch(std::exception & e)
     {
       return pos;
     }
-    /*}
-    else{
-        return pos;
-    }*/
 }
 
 void update_dir(char key, Vect2& dir){
-    //char key;
-    
-    /*if( internal::keyEvent() ){
-        key = internal::getch();
-    }*/
     dir.x = dir.y = 0;
     switch( key ){
         case  'q' :
@@ -115,8 +83,6 @@ void display(const GridType& background){
 }
 GridType generate_frame(Vect2 pos,const GridType& background){
     GridType screen = background;
-    int ly = background.size();
-    int lx = background[0].size();
     try{
         screen.at(pos.y).at(pos.x)='@';
         return screen;
@@ -128,11 +94,9 @@ GridType generate_frame(Vect2 pos,const GridType& background){
 void startGame(const std::string& filename){
     GridType background = read_level(filename);
     
-    int lap = 500;
+    int lap = 200;
     Vect2 pos{};
     Vect2 dir{};
-    int ly = background.size();
-    int lx = background[1].size();
     
     bool player_not_found=true;
     for(int y = 0; player_not_found && y<background.size();y++){
@@ -154,15 +118,15 @@ void startGame(const std::string& filename){
           char key = internal::getch();
           update_dir(key, dir);
           pos = update_wall_colision(pos,dir,background);
-          auto screen=generate_frame(pos,background);
-          backgroundClear();
-          display(screen);
+          
         }
         
         
         //update_dir(dir,pos,background);
-        
-        //internal::frameSleep(lap);
+        auto screen=generate_frame(pos,background);
+        backgroundClear();
+        display(screen);
+        internal::frameSleep(lap);
     }
 
 }
