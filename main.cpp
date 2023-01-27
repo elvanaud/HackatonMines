@@ -15,6 +15,13 @@
 #include <string.h>
 #include <unistd.h>
 
+
+struct Vect2{
+    int x;
+    int y;
+
+};
+
 void startGame(int lap, const int nx, const int ny, std::vector<int> &bg){
     char key;
     while( true ){
@@ -53,36 +60,49 @@ std::vector<int> backgroundSetup( const int& nx, const int& ny ){
   return bg; 
 }
 
-void maj_pos(const int x,const int y,std::vector<std::vector<char>>& frame){
-    int lx = frame.size();
-    int ly = frame[0].size();
+void maj_pos(Vect2 pos,std::vector<std::vector<char>>& frame){
     /*if(frame[x][y]=='-' || frame[x][y]=='|' || frame[x][y]==' '){
         
     }*/
-    frame[x][y]='@';
+    frame[pos.x][pos.y]='@';
 }
-void update_dir(int x, int y){
+void update_dir(Vect2& dir ,Vect2 pos,std::vector<std::vector<char>> frame){
     char key;
     if( internal::keyEvent() ){
         key = internal::getch();
     }
     switch( key ){
         case  'q' :
-            x--;
+            dir.x=-1;
             break;
         case  'd':
-            x++;
-            break;
-        case 'z':
-            y++;
+            dir.x=+1;
             break;
         case 's':
-            y--;
+            dir.y=+1;
+            break;
+        case 'z':
+            dir.y=-1;
             break;
     }
+    pos = update_wall_colision(pos,dir,std::vector<std::vector<char>>& frame);
 
-
-    
+}
+Vect2 update_wall_colision(Vect2 pos,Vect2 dir,std::vector<std::vector<char>>& frame){
+    Vect2 newpos;
+    newpos.x =pos.x+dir.x;
+    newpos.y=pos.y+dir.y;
+    switch(frame[newpos.x][newpos.y]){
+        case '-':
+            newpos=pos;
+            break;
+        case '|':
+            newpos=pos;
+            break;
+        case ' ':
+            newpos=pos;    
+    }
+    return newpos;
 }
 
 
