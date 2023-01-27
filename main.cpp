@@ -12,8 +12,12 @@
 struct Vect2{
     int x;
     int y;
+};
+
+class Game{
 
 };
+
 using GridType = std::vector<std::vector<char>>;
 
 void startGame(int lap, const int nx, const int ny, std::vector<int> &bg){
@@ -51,7 +55,8 @@ Vect2 update_wall_colision(Vect2 pos,Vect2 dir,const GridType& background){
             newpos=pos;
             break;
         case ' ':
-            newpos=pos;    
+            newpos=pos;
+            
       }
     return newpos;
     }
@@ -64,6 +69,8 @@ Vect2 update_wall_colision(Vect2 pos,Vect2 dir,const GridType& background){
         return pos;
     }*/
 }
+
+
 
 void update_dir(char key, Vect2& dir){
     //char key;
@@ -125,8 +132,13 @@ GridType generate_frame(Vect2 pos,const GridType& background){
         return background;
     }
 }
+
+
+
 void startGame(const std::string& filename){
     GridType background = read_level(filename);
+    int coin = 0;
+    int life = 5;
     
     int lap = 500;
     Vect2 pos{};
@@ -135,8 +147,8 @@ void startGame(const std::string& filename){
     int lx = background[1].size();
     
     bool player_not_found=true;
-    for(int y = 0; player_not_found && y<background.size();y++){
-        for(int x = 0;player_not_found && x<background[y].size();x++){
+    for(int y = 0; player_not_found && y< background.size() ;y++){
+        for(int x = 0;player_not_found && x< background[y].size() ;x++){
             if(background[y][x]=='@'){
                 player_not_found=false;
                 pos.x=x;
@@ -151,12 +163,29 @@ void startGame(const std::string& filename){
     {
         if(internal::keyEvent())
         {
+          Vect2 oldpos = pos;
           char key = internal::getch();
           update_dir(key, dir);
           pos = update_wall_colision(pos,dir,background);
+
+          switch(background[pos.y][pos.x]){
+            case '*':
+                background[pos.y][pos.x]='.';
+                coin+=1;
+                break;
+            case 'K':
+                life-=1;
+                pos=oldpos;
+                
+
+            
+          }
+          
           auto screen=generate_frame(pos,background);
           backgroundClear();
           display(screen);
+          std::cout<< "$ = "<<coin<<std::endl;
+          std::cout<< "life = "<<life <<std::endl;
         }
         
         
