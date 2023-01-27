@@ -1,18 +1,21 @@
-cmake_minimum_required(VERSION 3.0.0)
-project(Hackator VERSION 0.1.0)
+cmake_minimum_required( VERSION 3.0 )
+project(SnakeCpp)
 
-include(CTest)
-enable_testing()
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-set(SFML_DIR "../../../MesDocuments/Informatique/Ordinateur/Programmation/C++/Librairies/SFML/SFML-install/lib/cmake/SFML")
-find_package(SFML 2.5 COMPONENTS graphics REQUIRED)
+add_compile_options(
+    -Wall    
+    -Wextra  
+    -Wshadow  
+    -Wnon-virtual-dtor 
+    -Wfatal-errors
+)
 
-add_definitions(-DCMAKE_EXPORT_COMPILE_COMMANDS=ON)
+include_directories(include)
+add_subdirectory( src )
 
-add_executable(Hackator main.cc)
+add_executable(${PROJECT_NAME}.out main.cpp)
+target_link_libraries(${PROJECT_NAME}.out PUBLIC ${PROJECT_NAME})
 
-target_link_libraries(Hackator sfml-graphics)
-
-set(CPACK_PROJECT_NAME ${PROJECT_NAME})
-set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
-include(CPack)
+install(TARGETS ${PROJECT_NAME}.out DESTINATION bin)
