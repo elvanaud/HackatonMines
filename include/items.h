@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <iostream>
 
 struct Vect2{ // Volé au main mais amélioré
     int x;
@@ -19,13 +20,17 @@ class Inventaire
 { // Proposition : accéder aux potions de vie par une certaine touche, force par une autre, et 
 // Afficher quelque part sur l'écran le nombre de chaque potion en temps réel.
     public:
-    void change_life()
-    {
-
+    void change_life(int increment)
+    { // L'incrément est algébrique
+        this->life += increment;
     }
     void game_over()
     {
-
+        if(this->life <= 0)
+        {
+            // Commande de fin du jeu
+            std::cout << "Game Over..."
+        }
     }
 
     unsigned int life_max; // Vie maximale du héros 
@@ -94,5 +99,12 @@ class Potion
 };
 
 
-
 const std::map<short unsigned int, std::string> potion_type = {{0, "life"}, {1, "strenght"}};
+
+class Ennemi
+{
+    public:
+    
+
+    Vect2 pos;
+};
