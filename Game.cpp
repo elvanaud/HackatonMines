@@ -221,7 +221,7 @@ void Game::startGame()
       pos = oldpos;
       break;
     case 'Z':
-      life -=1;
+      inv.life -=1;
       pos=oldpos;
       break;
     case 'j':
@@ -239,9 +239,12 @@ void Game::startGame()
     backgroundClear();
     display(screen);
 
-    inv.printInventaire();
-    // std::cout << "$ = " << inv.gold << std::endl;
-    // std::cout << "life = " << inv.life << std::endl;
+    //inv.printInventaire();
+    std::cout << "$ = " << inv.gold << std::endl;
+    std::cout << "life = " << inv.life << std::endl;
+    std::cout << "life potions = " << life_potions << std::endl;
+
+  
 
     
   }
