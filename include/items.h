@@ -49,7 +49,7 @@ class Gold
         int a = this->get_amount();
         inv.gold += a;
     }
-    void Gold::take(Vect2 pos, Inventaire inv)
+    void take(Vect2 pos, Inventaire inv)
     {
         if( pos.est_egal(this->coord) )
         { // coordonnées joueur == coordonnées Item
@@ -75,7 +75,7 @@ class Potion
             inv.potions_force += 1;
         }
     }
-    void Potion::take(Vect2 pos, Inventaire inv)
+    void take(Vect2 pos, Inventaire inv)
     {
         if( pos.est_egal(this->coord) )
         { // coordonnées joueur == coordonnées Item
