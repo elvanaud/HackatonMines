@@ -172,7 +172,7 @@ void Game::startGame()
       pos = update_wall_colision(pos, dir, background);
     }
 
-    auto screen = generate_frame(pos, background);
+   // auto screen = generate_frame();
 
     switch (background[pos.y][pos.x])
     {
@@ -186,7 +186,7 @@ void Game::startGame()
       break;
     }
 
-    screen = generate_frame(pos, background);
+    auto screen = generate_frame();
     backgroundClear();
     display(screen);
     std::cout << "$ = " << inv.gold << std::endl;
