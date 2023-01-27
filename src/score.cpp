@@ -17,11 +17,11 @@ std::string printInventaire()
     //std::string strength = inventaire.strength;    
 
     std::string LifeBar = "";
-    for(int i=0;i<=pv;i++)
+    for(unsigned int i=0;i<=pv;i++)
     {
         LifeBar + 'o' ;
     }
-    for(int i=0;i<=life_max - pv;i++)
+    for(unsigned int i=0;i<=life_max - pv;i++)
     {
         LifeBar + '-';
     }
