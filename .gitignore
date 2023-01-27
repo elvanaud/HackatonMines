@@ -1,2 +1,2 @@
-build
-*.dll
+build 
+dist 

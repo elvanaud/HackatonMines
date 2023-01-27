@@ -11,6 +11,8 @@
 #elif defined(OS_LINUX) || defined(OS_MAC)
 #include "sys/ioctl.h"
 #include "termios.h"
+#include <sys/select.h>
+#include <termios.h>
 #endif
 
 #include "stdio.h"
@@ -42,6 +44,21 @@ int keyEvent(){
     //int bytesWaiting;                                                                                                                                                        
     ioctl(STDIN, FIONREAD, &bytesWaiting);
     return bytesWaiting;
+    #endif
+}
+
+char getch()
+{
+    #if defined(OS_WIN)
+    return _getch();
+    #elif defined(OS_LINUX) || defined(OS_MAC) 
+    int r;
+    unsigned char c;
+    if ((r = read(0, &c, sizeof(c))) < 0) {
+        return r;
+    } else {
+        return c;
+    }
     #endif
 }
 
