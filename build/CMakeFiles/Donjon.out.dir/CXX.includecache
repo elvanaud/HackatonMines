@@ -51,6 +51,8 @@ items.h
 /home/simoncappe/dev/hackaton/HackatonMines/items.h
 ennemi.h
 /home/simoncappe/dev/hackaton/HackatonMines/ennemi.h
+cmath
+-
 
 /home/simoncappe/dev/hackaton/HackatonMines/Game.hpp
 vector
