@@ -8,7 +8,6 @@
 
 void Game::processLevel()
 {
-  bool player_not_found=true;
   for(int y = 0; y<background.size();y++){
       for(int x = 0; x<background[y].size();x++){
           if(background[y][x]=='@'){
@@ -174,7 +173,9 @@ void Game::startGame()
 
    // auto screen = generate_frame();
 
-    switch (background[pos.y][pos.x])
+    //std::cout << pos.y << " " << pos.x << std::endl;
+    try{
+    switch (background.at(pos.y).at(pos.x))
     {
     case '*':
       background[pos.y][pos.x] = '.';
@@ -184,13 +185,15 @@ void Game::startGame()
       inv.life -= 1;
       pos = oldpos;
       break;
+    }}catch(std::exception & e){
+      std::cout << "dfvbdfv";
     }
 
     auto screen = generate_frame();
     backgroundClear();
     display(screen);
 
-    inv.printInventaire()
+    inv.printInventaire();
     // std::cout << "$ = " << inv.gold << std::endl;
     // std::cout << "life = " << inv.life << std::endl;
 

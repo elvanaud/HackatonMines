@@ -20,7 +20,7 @@ private:
   GridType read_level(const std::string& filename);
   GridType generate_frame();
   
-  GridType background;
+  GridType background{};
 
   void attack_enemy();
   
